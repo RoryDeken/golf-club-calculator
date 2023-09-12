@@ -29,7 +29,7 @@ function App() {
     setClubs(data?._embedded.clublist);
     console.log(data);
     console.log(clubs);
-  }, []);
+  }, [data]);
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
