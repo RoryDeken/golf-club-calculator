@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import {
+  AppBar,
+  Box,
+  Grid,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  interface Club {
+    id: number;
+    name: string;
+    dist: string;
+  }
+  const [data, setData] = useState<any>();
+  const [clubs, setClubs] = useState<Club[]>();
 
+  useEffect(() => {
+    axios.get(`http://localhost:8080/clubs`).then((res) => {
+      setData(res.data);
+    });
+  }, []);
+  useEffect(() => {
+    setClubs(data?._embedded.clublist);
+    console.log(data);
+    console.log(clubs);
+  }, []);
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="fixed" sx={{ backgroundColor: "#1e692b" }}>
+          <Toolbar>
+            <IconButton size="large" edge="start" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Club Calculator
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Grid
+          container
+          spacing={2}
+          sx={{ paddingTop: "100px" }}
+          justifyContent={"center"}
+        >
+          <Grid
+            item
+            xs={8}
+            justifyContent={"center"}
+            alignItems={"center"}
+            alignContent={"center"}
+          >
+            {clubs?.length} Clubs in bag
+            {clubs?.map((club: Club) => club.name + " " + club.dist)}
+          </Grid>
+        </Grid>
+      </Box>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
