@@ -1,10 +1,10 @@
-package com.dekedesign.clubcalculator;
+package com.example.clubsuggester;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ClubCalculatorApplicationTests {
+class ClubSuggesterApplicationTests {
 
 	@Test
 	void contextLoads() {
