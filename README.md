@@ -32,4 +32,14 @@ This url may change depending on the avaiable ports on your computer and your ma
 
 ---
 
-This is a simple proof of concept app and is not intended for production
+This application was written using node v18.13.0 and may or may not work with later or earlier versions.
+
+Switch to the `/frontend` directory and run `npm install`
+
+Once the dependencies have been installed run `npm run dev` to start Vite and load the UI.
+
+You should now be able to see the app running on port 3000.
+
+**_Note_**: This is currently set up to make requests to localhost:8080 as the urls are currently hardcoded to use the api provided by the backend spring application
+
+This is a simple proof of concept app and is not intended for production. It is currently under development so by no means is this a finished product.
