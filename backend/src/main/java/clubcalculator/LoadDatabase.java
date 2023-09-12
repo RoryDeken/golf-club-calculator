@@ -24,6 +24,9 @@ class LoadDatabase {
 			log.info("Preloading " + repository.save(new Club("8 Iron", "140")));
 			log.info("Preloading " + repository.save(new Club("9 Iron", "125")));
 			log.info("Preloading " + repository.save(new Club("Pitching Wedge", "100")));
+			log.info("Preloading " + repository.save(new Club("Gap Wedge", "75")));
+			log.info("Preloading " + repository.save(new Club("Sand Wedge", "50")));
+			log.info("Preloading " + repository.save(new Club("Lob Wedge", "20")));
 			log.info("Preloading " + repository.save(new Club("Putter", "1")));
 };}
 }

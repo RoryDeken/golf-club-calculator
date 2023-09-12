@@ -20,7 +20,10 @@ class ClubController {
 	ClubController(ClubRepository repository) {
 		this.repository = repository;
 	}
-
+	@GetMapping("/") String main(){
+		return "This application is an api and is meant to be interacted with via API instead of just a browser. " +
+				"You can vist these routes to see the return values: /clubs /suggest/250";
+	}
 	@GetMapping("/clubs")
 	CollectionModel<EntityModel<Club>> all() {
 
