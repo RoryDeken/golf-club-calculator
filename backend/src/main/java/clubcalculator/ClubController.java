@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +25,15 @@ class ClubController {
 				"You can vist these routes to see the return values: /clubs /suggest/250";
 	}
 	@GetMapping("/clubs")
-	/* CollectionModel<EntityModel<Club>> */ List<EntityModel<Club>> all() {
+	List<EntityModel<Club>> all() {
 
 		List<EntityModel<Club>> clubs = repository.findAll().stream()
 				.map(club -> EntityModel.of(club,
 						linkTo(methodOn(ClubController.class).one(club.getId())).withSelfRel(),
 						linkTo(methodOn(ClubController.class).all()).withRel("clubs")))
 				.collect(Collectors.toList());
-		// return CollectionModel.of(clubs, linkTo(methodOn(ClubController.class).all()).withSelfRel());
 		return clubs;
+
 	}
 
 	@GetMapping("/suggest/{dist}")
