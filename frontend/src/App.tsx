@@ -6,6 +6,7 @@ import {
   Grid,
   IconButton,
   LinearProgress,
+  Modal,
   TextField,
   Toolbar,
   Typography,
@@ -21,14 +22,34 @@ function App() {
     name: string;
     dist: string;
   }
+  interface NewClub {
+    name: string;
+    dist: string;
+  }
 
   const [recommended, setRecommended] = useState<String>();
   const [dist, setDist] = useState<String>();
   const [clubs, setClubs] = useState<Club[]>();
   const [isLoading, setIsLoading] = useState<boolean>();
+  const [openAdd, setOpenAdd] = useState(false);
+  const handleOpenAdd = () => setOpenAdd(true);
+  const handleCloseAdd = () => setOpenAdd(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => setOpenEdit(false);
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
-  const onEditButtonClick = (e: any, row: any) => {
-    e.stopPropagation();
+  const onEditButtonClick = (row: any) => {
     axios
       .post(row.links[0].href, {
         name: "Edited club",
@@ -38,13 +59,12 @@ function App() {
         setIsLoading(false);
       });
   };
-  const onAddButtonClick = (e: any, row: any) => {
+  const onAddButtonClick = (vars: NewClub) => {
     setIsLoading(true);
-    e.stopPropagation();
     axios
-      .post(row.links[1].href, {
-        name: "Added club",
-        dist: "300",
+      .post("http://localhost:8080/clubs", {
+        name: vars.name,
+        dist: vars.dist,
       })
       .then(() => {
         setIsLoading(false);
@@ -90,15 +110,8 @@ function App() {
         return (
           <>
             <Button
-              onClick={(e) => onAddButtonClick(e, params.row)}
-              variant="contained"
-              color="success"
-              sx={{ marginRight: 2 }}
-            >
-              Add
-            </Button>
-            <Button
-              onClick={(e) => onEditButtonClick(e, params.row)}
+              // onClick={(e) => onEditButtonClick(e, params.row)}
+              onClick={handleOpenEdit}
               variant="contained"
               sx={{ marginRight: 2 }}
             >
@@ -160,7 +173,18 @@ function App() {
               onChange={handleDistChange}
             ></TextField>
 
-            <Typography variant="h3">Clubs in bag</Typography>
+            <Typography variant="h3">
+              Clubs in bag{" "}
+              <Button
+                onClick={handleOpenAdd}
+                variant="contained"
+                color="success"
+                sx={{ marginRight: 2 }}
+              >
+                Add
+              </Button>
+            </Typography>
+
             {isLoading ? <LinearProgress /> : null}
             <Box sx={{ height: 800, width: "100%" }}>
               <DataGrid
@@ -174,6 +198,67 @@ function App() {
                   },
                 }} */
               />
+
+              <Modal
+                open={openAdd}
+                onClose={handleCloseAdd}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Add club
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <TextField placeholder="Club name"></TextField>
+                    <TextField placeholder="330 yds"></TextField>
+                    <Button
+                      onClick={(e) =>
+                        onAddButtonClick({ name: "tet", dist: "300" })
+                      }
+                    >
+                      Add
+                    </Button>
+                  </Typography>
+                </Box>
+              </Modal>
+              <Modal
+                open={openEdit}
+                onClose={handleCloseEdit}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Edit club
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <TextField
+                      placeholder="Club name"
+                      value={"club name editing"}
+                    ></TextField>
+                    <TextField
+                      placeholder="330 yds"
+                      value={"club dist editing"}
+                    ></TextField>
+                    <Button
+                      onClick={(e) =>
+                        onEditButtonClick({ name: "tet", dist: "300" })
+                      }
+                    >
+                      Save
+                    </Button>
+                  </Typography>
+                </Box>
+              </Modal>
             </Box>
           </Grid>
         </Grid>
