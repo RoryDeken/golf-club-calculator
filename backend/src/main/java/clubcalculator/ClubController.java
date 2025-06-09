@@ -11,7 +11,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 class ClubController {
 	private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
@@ -24,6 +24,7 @@ class ClubController {
 		return "This application is an api and is meant to be interacted with via API instead of just a browser. " +
 				"You can vist these routes to see the return values: /clubs /suggest/250";
 	}
+
 	@GetMapping("/clubs")
 	List<EntityModel<Club>> all() {
 

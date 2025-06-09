@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Grid,
-  IconButton,
   LinearProgress,
   Modal,
   TextField,
@@ -12,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef, GridComparatorFn } from "@mui/x-data-grid";
-import MenuIcon from "@mui/icons-material/Menu";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
@@ -140,9 +138,6 @@ function App() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed" sx={{ backgroundColor: "#1e692b" }}>
           <Toolbar>
-            <IconButton size="large" edge="start" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Club Calculator
             </Typography>
@@ -180,7 +175,7 @@ function App() {
             ></TextField>
 
             <Typography variant="h3" sx={{ my: 5 }}>
-              Clubs in bag{" "}
+              Clubs in your bag{" "}
               <Button
                 onClick={handleOpenAdd}
                 variant="contained"

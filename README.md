@@ -38,8 +38,14 @@ Switch to the `/frontend` directory and run `npm install`
 
 Once the dependencies have been installed run `npm run dev` to start Vite and load the UI.
 
-You should now be able to see the app running on port 3000.
+You should now be able to see the app running on port 5173.
 
-**_Note_**: This is currently set up to make requests to localhost:8080 as the urls are currently hardcoded to use the api provided by the backend spring application
+**_Note_**: This is currently set up to make requests to localhost:8080 as the urls are currently hardcoded to use the api provided by the backend spring application and CORS has been enabled since this is a demo application.
+
+Alternatively you can use the dockerfile present in each frontend/backend folder to use docker to spin up containers and corresponding images for these.
 
 This is a simple proof of concept app and is not intended for production. It is currently under development so by no means is this a finished product.
+
+## Distance Calculator
+
+For convenience there is also a distance calculator that translates ball speed into a projected carry distance that has been included at the bottom of this application but the repository can be found [here](https://github.com/RoryDeken/golf-distance-calculator) and a live demo that lives on github pages can be found [here](https://rorydeken.github.io/golf-distance-calculator/)
