@@ -26,7 +26,7 @@ function App() {
     name?: string;
     dist?: string;
   }
-  const server = 'http://3.16.31.165:8080';
+  const server = 'https://3.16.31.165:8080';
   const [recommended, setRecommended] = useState<String>();
   const [dist, setDist] = useState<String>();
   const [clubs, setClubs] = useState<Club[]>();
