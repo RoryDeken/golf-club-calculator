@@ -28,21 +28,21 @@ This url may change depending on the avaiable ports on your computer and your ma
 
 ## Frontend
 
-`/frontend` contains the React app used for display and handling requests to the API
+The top level folder contains the React app used for display and handling requests to the API. The backend is stored here and is deployed on AWS via a separate process.
 
 ---
 
 This application was written using node v18.13.0 and may or may not work with later or earlier versions.
 
-Switch to the `/frontend` directory and run `npm install`
+run `npm install`
 
 Once the dependencies have been installed run `npm run dev` to start Vite and load the UI.
 
 You should now be able to see the app running on port 5173.
 
-**_Note_**: This is currently set up to make requests to localhost:8080 as the urls are currently hardcoded to use the api provided by the backend spring application and CORS has been enabled since this is a demo application.
+**_Note_**: This is currently set up to make requests to localhost:5173 as the urls are currently hardcoded to use the api provided by the backend spring application and CORS has been enabled since this is a demo application.
 
-Alternatively you can use the dockerfile present in each frontend/backend folder to use docker to spin up containers and corresponding images for these.
+Alternatively you can use the dockerfile present in the root folder for the frontend and the backend folder to use docker to spin up containers and corresponding images for these.
 
 This is a simple proof of concept app and is not intended for production. It is currently under development so by no means is this a finished product.
 
