@@ -14,6 +14,8 @@ import { DataGrid, GridColDef, GridComparatorFn } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
+
+
 function App() {
   interface Club {
     id?: number;
@@ -24,7 +26,7 @@ function App() {
     name?: string;
     dist?: string;
   }
-
+  const server = 'http://3.16.31.165:8080';
   const [recommended, setRecommended] = useState<String>();
   const [dist, setDist] = useState<String>();
   const [clubs, setClubs] = useState<Club[]>();
@@ -47,7 +49,7 @@ function App() {
 
   const onEditButtonClick = (editedClub?: Club) => {
     axios
-      .put(`http://localhost:8080/clubs/${editedClub?.id}`, editedClub)
+      .put(`${server}/clubs/${editedClub?.id}`, editedClub)
       .then(() => {
         setIsLoading(false);
         setOpenEdit(false);
@@ -56,7 +58,7 @@ function App() {
   };
   const onAddButtonClick = (newClub?: NewClub) => {
     setIsLoading(true);
-    axios.post("http://localhost:8080/clubs", newClub).then(() => {
+    axios.post(`${server}/clubs`, newClub).then(() => {
       setIsLoading(false);
       setRefreshClubs(!refreshClubs);
       setOpenAdd(false);
@@ -78,13 +80,13 @@ function App() {
     }
   };
   useEffect(() => {
-    axios.get(`http://localhost:8080/clubs`).then((res) => {
+    axios.get(`${server}/clubs`).then((res) => {
       setClubs(res.data);
     });
   }, [refreshClubs]);
   useEffect(() => {
     dist
-      ? axios.get(`http://localhost:8080/suggest/${dist}`).then((res) => {
+      ? axios.get(`${server}/suggest/${dist}`).then((res) => {
           setRecommended(res.data);
         })
       : null;
