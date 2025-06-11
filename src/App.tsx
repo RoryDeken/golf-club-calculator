@@ -27,6 +27,12 @@ function App() {
     dist?: string;
   }
   const server = 'https://3.16.31.165:8080';
+  const apiClient = axios.create({
+  baseURL: ${server},
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
   const [recommended, setRecommended] = useState<String>();
   const [dist, setDist] = useState<String>();
   const [clubs, setClubs] = useState<Club[]>();
@@ -58,7 +64,7 @@ function App() {
   };
   const onAddButtonClick = (newClub?: NewClub) => {
     setIsLoading(true);
-    axios.post(`${server}/clubs`, newClub).then(() => {
+    apiClient.post(`/clubs`, newClub).then(() => {
       setIsLoading(false);
       setRefreshClubs(!refreshClubs);
       setOpenAdd(false);
@@ -67,7 +73,7 @@ function App() {
   };
   const onDeleteButtonClick = (e: any, row: any) => {
     e.stopPropagation();
-    axios.delete(row.links[0].href).then(() => {
+    apiClient.delete(row.links[0].href).then(() => {
       setIsLoading(false);
       setRefreshClubs(!refreshClubs);
     });
@@ -80,13 +86,13 @@ function App() {
     }
   };
   useEffect(() => {
-    axios.get(`${server}/clubs`).then((res) => {
+    apiClient.get(`/clubs`).then((res) => {
       setClubs(res.data);
     });
   }, [refreshClubs]);
   useEffect(() => {
     dist
-      ? axios.get(`${server}/suggest/${dist}`).then((res) => {
+      ? apiClient.get(`/suggest/${dist}`).then((res) => {
           setRecommended(res.data);
         })
       : null;
