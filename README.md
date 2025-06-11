@@ -2,6 +2,8 @@
 
 ### This tool personalizes the clubs in your bag and predicts the clubs needed given the remaining distance to the hole. It uses Java Spring for the API and React for the UI
 
+## CURRENTLY UNDER CONSTRUCTION - PARDON THE DUST ##
+
 ## Backend
 
 `/backend` contains the Java Spring app. Switch to this directory and follow the instructions below:
@@ -25,6 +27,8 @@ When the app starts, we can immediately interrogate it.
 Or visit the url in a browser to see the returned value
 
 This url may change depending on the avaiable ports on your computer and your machine's configuration
+
+This Spring Boot app is currently hosted at http://3.16.31.165:8080/ on AWS Elastic Container Service but a SSL cert has not been purchased and Load Balancer has not been set up yet so this currently only works locally. You can see the API is working by visiting [here](http://3.16.31.165:8080/clubs). 
 
 ## Frontend
 
