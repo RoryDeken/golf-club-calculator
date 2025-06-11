@@ -54,7 +54,7 @@ function App() {
 
   const onEditButtonClick = (editedClub?: Club) => {
     axios
-      .put(`${server}/clubs/${editedClub?.id}`, editedClub)
+      .put(`/clubs/${editedClub?.id}`, editedClub)
       .then(() => {
         setIsLoading(false);
         setOpenEdit(false);
