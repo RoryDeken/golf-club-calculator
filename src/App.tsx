@@ -26,9 +26,8 @@ function App() {
     name?: string;
     dist?: string;
   }
-  const server = 'https://3.16.31.165:8080';
   const apiClient = axios.create({
-  baseURL: ${server},
+  baseURL: 'http://3.16.31.165:8080',
   headers: {
     'Content-Type': 'application/json',
   },
